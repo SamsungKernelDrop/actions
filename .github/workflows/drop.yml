@@ -1,0 +1,25 @@
+name: Samsung Kernel Sources Drop CI
+
+on:
+  workflow_dispatch:
+    inputs:
+      SOURCE_MODEL:
+        description: "Device model"
+        required: true
+      SOURCE_VER:
+        description: "Source version"
+        required: true
+
+env:
+  SOURCE_MODEL: ${{ github.event.inputs.SOURCE_MODEL }}
+  SOURCE_VER: ${{ github.event.inputs.SOURCE_VER }}
+
+jobs:
+  dump:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download source
+        run: |
+          git clone https://github.com/manoedinata/osrc_download -b v4 && cd osrc_download
+          python3 osrc_download.py -m ${SOURCE_MODEL} download -v ${SOURCE_VER}
