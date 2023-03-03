@@ -22,4 +22,5 @@ jobs:
       - name: Download source
         run: |
           git clone https://github.com/manoedinata/osrc_download -b v4 && cd osrc_download
+          pip3 install -r requirements.txt
           python3 osrc_download.py -m ${SOURCE_MODEL} download -v ${SOURCE_VER}
